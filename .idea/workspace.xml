@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6604ea94-1966-4b38-9282-259093bd7232" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1V4CyNBr7FjrvIcFRaYBJEkFKHp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6604ea94-1966-4b38-9282-259093bd7232" name="Default Changelist" comment="" />
+      <created>1576503233664</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576503233664</updated>
+      <workItem from="1576503234901" duration="2059000" />
+      <workItem from="1576696087353" duration="734000" />
+      <workItem from="1576696871962" duration="5221000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="711" y="411" width="488" height="256" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1576696437826">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="711" y="411" width="488" height="256" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1080@0.0.1920.1080" timestamp="1576696437826" />
+    <state x="443" y="117" width="1024" height="843" key="SettingsEditor" timestamp="1576696832687">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="443" y="117" width="1024" height="843" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1576696832687" />
+    <state x="616" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1576696126382">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="616" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1576696126382" />
+    <state x="605" y="144" width="710" height="792" key="find.popup" timestamp="1576696392063">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="605" y="144" width="710" height="792" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1576696392063" />
+    <state x="624" y="247" key="run.anything.popup" timestamp="1576697737096">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="624" y="247" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1576697737096" />
+  </component>
+</project>
