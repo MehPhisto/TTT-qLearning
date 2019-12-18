@@ -141,11 +141,12 @@ class Environment:
         self.canPlay = True
         self.playerWinner = ''
 
-    def launchGame(self):
+    def launchGame(self, game_count):
         """ Alternate the move between the two player """
         self.initGame()
-        currentPlayer = 'X'
+        currentPlayer = 'X' if game_count % 2 == 0 else 'O'
         continueGame = True
+
         while continueGame:
             # print for human
             if self.withHuman:
@@ -243,7 +244,7 @@ if __name__ == '__main__':
     game = Environment(agent1, agent2)
     for i in range(0, 200000):
         print("Turn {} of training".format(i))
-        game.launchGame()
+        game.launchGame(i)
     # play with the agent
     # print(" Let's go now !!! ")
     # continuePlay = 'y'
