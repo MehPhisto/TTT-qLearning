@@ -61,7 +61,7 @@ class Agent(Player):
         current_best = [None, None]
         current_int = 0
         undefined_found = False
-        undefined_pos = [None, None]
+        undefined_pos = []
 
         for i in range(0, len(available_pos)):
             tmp_board = copy.deepcopy(board)
@@ -73,10 +73,11 @@ class Agent(Player):
                     current_best = available_pos[i]
             else:
                 undefined_found = True
-                undefined_pos = available_pos[i]
+                undefined_pos.append(available_pos[i])
 
         if undefined_found:
-            choose_pos = undefined_pos
+            random_value = random.randint(0, len(undefined_pos) - 1)
+            choose_pos = undefined_pos[random_value]
         elif current_best == [None, None]:
             random_value = random.randint(0, len(available_pos) - 1)
             choose_pos = available_pos[random_value]
@@ -234,7 +235,7 @@ if __name__ == '__main__':
     agent1 = Agent(0.92, 0.42, "fileSave1.json")
     agent2 = Agent(0.66, 0.33, "fileSave2.json")
     game = Environment(agent1, agent2)
-    for i in range(0, 20):
+    for i in range(0, 20000):
         print("Turn {} of training".format(i))
         game.launchGame()
     # play with the agent
