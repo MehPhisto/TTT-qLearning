@@ -3,6 +3,7 @@ from copy import deepcopy
 import logging
 import random
 import copy
+import json
 
 
 class Player:
@@ -37,13 +38,11 @@ class Agent(Player):
         self.filename = file_name
 
         try:
-            save_file = open(self.filename, 'r')
-            data_loaded = save_file.read()
+            with open(self.filename) as json_file:
+                data_loaded = json.load(json_file)
 
             if len(data_loaded) == 0:
                 data_loaded = {}
-
-            save_file.close()
 
         except:
             data_loaded = {}
@@ -52,13 +51,14 @@ class Agent(Player):
 
         self.learning_factor = learning_factor
         self.refresh_factor = refresh_factor
+        self.history = []
 
         # self.learning_factor = 0.5 if self.learning_factor >= 1 or self.learning_factor <= 0 else print("potato")
         # self.refresh_factor = 0.5 if self.refresh_factor >= 1 or self.refresh_factor  <= 0 else print("potato")
 
     def play(self, board, current_player):
         available_pos = self.findAvailablePositions(board)
-        current_best = (None, None)
+        current_best = [None, None]
         current_int = 0
 
         for i in range(0, len(available_pos)):
@@ -68,32 +68,51 @@ class Agent(Player):
             if str(tmp_board) in self.data_loaded:
                 if self.data_loaded[str(tmp_board)] > current_int:
                     current_int = self.data_loaded[str(tmp_board)]
-                    current_best = ([available_pos[i][0]], [available_pos[i][1]])
+                    current_best = available_pos[i]
 
-        if current_best == (None, None):
-            random_value = random.randint(0, len(available_pos)-1)
-            return available_pos[random_value]
+        if current_best == [None, None]:
+            print('toto')
+            random_value = random.randint(0, len(available_pos) - 1)
+            choose_pos = available_pos[random_value]
         else:
-            return current_best
+            print(current_best)
+            print('tata')
+            choose_pos = current_best
+
+        tmp_board = copy.deepcopy(board)
+
+        tmp_board[choose_pos[0]][choose_pos[1]] = current_player
+        self.history.append(str(tmp_board))
+
+        return choose_pos[0], choose_pos[1]
 
     def receiveReward(self, reward):
 
-        dataToAppend = ''
+        try:
+            values = self.data_loaded.values()
+            maxValue = max(values)
+        except:
+            maxValue = reward
 
-        self.filename = "save.txt"
+        for i in range(0, len(self.history)):
+            if self.history[i] in self.data_loaded:
+                tmp_value = copy.deepcopy(self.data_loaded[self.history[i]])
+                self.data_loaded[self.history[i]] = \
+                    tmp_value + \
+                    self.learning_factor * (
+                        reward + self.refresh_factor * maxValue - tmp_value)
+            else:
+                self.data_loaded[self.history[i]] = reward
 
-        save_file = open(self.filename, 'w+')
-
-        save_file.write(dataToAppend)
-
-        save_file.close()
+        with open(self.filename, 'w') as outfile:
+            json.dump(self.data_loaded, outfile)
 
     def findAvailablePositions(self, board):
         available_positions = []
         for i in range(0, len(board)):
             for j in range(0, len(board[i])):
                 if board[i][j] == ' ':
-                    available_positions.append((i, j))
+                    available_positions.append([i, j])
 
         return available_positions
 
@@ -182,14 +201,14 @@ class Environment:
     def giveRewards(self):
         print(self.playerWinner)
         if self.playerWinner.upper() == 'X':
-            self.player1.receiveRewards(1)
-            self.player2.receiveRewards(0)
+            self.player1.receiveReward(1)
+            self.player2.receiveReward(0)
         elif self.playerWinner.upper() == 'O':
-            self.player2.receiveRewards(1)
-            self.player1.receiveRewards(0)
+            self.player2.receiveReward(1)
+            self.player1.receiveReward(0)
         else:
-            self.player1.receiveRewards(0.5)
-            self.player2.receiveRewards(0.5)
+            self.player1.receiveReward(0.5)
+            self.player2.receiveReward(0.5)
 
         print(self.__str__())
 
@@ -208,10 +227,10 @@ if __name__ == '__main__':
     # # to log each action of agent
     # logging.basicConfig(self.filename='game.log', level=logging.DEBUG)
 
-    agent1 = Agent(0.92, 0.42, "fileSave1")
-    agent2 = Agent(0.66, 0.33, "fileSave2")
+    agent1 = Agent(0.92, 0.42, "fileSave1.json")
+    agent2 = Agent(0.66, 0.33, "fileSave2.json")
     game = Environment(agent1, agent2)
-    for i in range(0, 200):
+    for i in range(0, 20):
         print("Turn {} of training".format(i))
         game.launchGame()
     # play with the agent
