@@ -60,6 +60,8 @@ class Agent(Player):
         available_pos = self.findAvailablePositions(board)
         current_best = [None, None]
         current_int = 0
+        undefined_found = False
+        undefined_pos = [None, None]
 
         for i in range(0, len(available_pos)):
             tmp_board = copy.deepcopy(board)
@@ -69,14 +71,16 @@ class Agent(Player):
                 if self.data_loaded[str(tmp_board)] > current_int:
                     current_int = self.data_loaded[str(tmp_board)]
                     current_best = available_pos[i]
+            else:
+                undefined_found = True
+                undefined_pos = available_pos[i]
 
-        if current_best == [None, None]:
-            print('toto')
+        if undefined_found:
+            choose_pos = undefined_pos
+        elif current_best == [None, None]:
             random_value = random.randint(0, len(available_pos) - 1)
             choose_pos = available_pos[random_value]
         else:
-            print(current_best)
-            print('tata')
             choose_pos = current_best
 
         tmp_board = copy.deepcopy(board)
