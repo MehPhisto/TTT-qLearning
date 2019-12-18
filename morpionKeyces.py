@@ -130,6 +130,8 @@ class Environment:
         self.canPlay = True
         self.playerWinner = ''
         self.withHuman = withHuman
+        self.player1_win_count = 0
+        self.player2_win_count = 0
 
     def initGame(self):
         """  Defines a bard with 9 empty case, ie a space
@@ -206,9 +208,11 @@ class Environment:
     def giveRewards(self):
         print(self.playerWinner)
         if self.playerWinner.upper() == 'X':
+            self.player1_win_count += 1
             self.player1.receiveReward(1)
             self.player2.receiveReward(0)
         elif self.playerWinner.upper() == 'O':
+            self.player2_win_count += 1
             self.player2.receiveReward(1)
             self.player1.receiveReward(0)
         else:
@@ -216,6 +220,8 @@ class Environment:
             self.player2.receiveReward(0.5)
 
         print(self.__str__())
+        print('PLAYER 1 WINS : ' + str(self.player1_win_count))
+        print('PLAYER 2 WINS : ' + str(self.player2_win_count))
 
     def __str__(self):
         s = ''
@@ -232,10 +238,10 @@ if __name__ == '__main__':
     # # to log each action of agent
     # logging.basicConfig(self.filename='game.log', level=logging.DEBUG)
 
-    agent1 = Agent(0.92, 0.42, "fileSave1.json")
-    agent2 = Agent(0.66, 0.33, "fileSave2.json")
+    agent1 = Agent(0.42, 0.33, "fileSave1.json")
+    agent2 = Agent(0.92, 0.42, "fileSave2.json")
     game = Environment(agent1, agent2)
-    for i in range(0, 20000):
+    for i in range(0, 200000):
         print("Turn {} of training".format(i))
         game.launchGame()
     # play with the agent
