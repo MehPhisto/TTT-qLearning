@@ -94,8 +94,9 @@ class Agent(Player):
     def receiveReward(self, reward):
 
         try:
-            values = self.data_loaded.values()
-            maxValue = max(values)
+            # values = self.data_loaded.values()
+            maxValue = 1
+            # maxValue = max(values)
         except:
             maxValue = reward
 
@@ -208,7 +209,7 @@ class Environment:
         return False
 
     def giveRewards(self):
-        print(self.playerWinner)
+        # print(self.playerWinner)
         if self.playerWinner.upper() == 'X':
             self.player1_win_count += 1
             self.player1.receiveReward(1)
@@ -222,10 +223,10 @@ class Environment:
             self.player1.receiveReward(0.5)
             self.player2.receiveReward(0.5)
 
-        print(self.__str__())
-        print('AGENT 1 WINS : ' + str(self.player1_win_count))
-        print('AGENT 2 WINS : ' + str(self.player2_win_count))
-        print('DRAW : ' + str(self.draw_count))
+        # print(self.__str__())
+        # print('AGENT 1 WINS : ' + str(self.player1_win_count))
+        # print('AGENT 2 WINS : ' + str(self.player2_win_count))
+        # print('DRAW : ' + str(self.draw_count))
 
     def __str__(self):
         s = ''
@@ -241,13 +242,22 @@ if __name__ == '__main__':
     print('*** TRAININ PERIOD ***')
     # # to log each action of agent
     # logging.basicConfig(self.filename='game.log', level=logging.DEBUG)
-
-    agent1 = Agent(0.42, 0.33, "fileSave1.json")
-    agent2 = Agent(0.42, 0.33, "fileSave2.json")
+    printCount=0
+    agent1 = Agent(0.1, 1, "fileSave1_pilo.json")
+    agent2 = Agent(0.9, 1, "fileSave2_pilo.json")
     game = Environment(agent1, agent2)
-    for i in range(0, 200000):
-        print("Turn {} of training".format(i))
+    for i in range(0, 10000):
+        # print("Turn {} of training".format(i))
         game.launchGame(i)
+        printCount += 1
+        if printCount == 500:
+            print("Turn {} of training".format(i+1))
+            print(game.__str__())
+            print('AGENT 1 WINS : ' + str(game.player1_win_count))
+            print('AGENT 2 WINS : ' + str(game.player2_win_count))
+            print('DRAW : ' + str(game.draw_count))
+            printCount = 0
+
     # play with the agent
     # print(" Let's go now !!! ")
     # continuePlay = 'y'
